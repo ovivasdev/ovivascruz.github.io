@@ -2,11 +2,20 @@
     'use strict';
     document.addEventListener('DOMContentLoaded', () => {
       function setTheme() {
+        const lightThemeColor = '#0099e5';
+        const darkThemeColor = '#ff714a';
+        const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+        const statusBarMetaTag = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+
         const themeLink = document.getElementById('theme-link');
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          themeLink.href = 'css/main-dark.css';
+            themeColorMetaTag.setAttribute('content', darkThemeColor);
+            statusBarMetaTag.setAttribute('content', darkThemeColor);
+            themeLink.href = 'css/main-dark.css';
         } else {
-          themeLink.href = 'css/main.css';
+            themeColorMetaTag.setAttribute('content', lightThemeColor);
+            statusBarMetaTag.setAttribute('content', lightThemeColor);
+            themeLink.href = 'css/main.css';
         }
       }
 
