@@ -43,18 +43,14 @@
         a('#contact_form').validator(),
         a('#contact_form').on('submit', function(d) {
             if (!d.isDefaultPrevented()) {
-                return a.ajax({
-                    type: 'POST',
-                    url: 'contact_form/contact_form.php',
-                    data: a(this).serialize(),
-                    success: function(g) {
-                        var h = 'alert-' + g.type
-                          , i = g.message;
-                        h && i && (a('#contact_form').find('.messages').html('<div class="alert ' + h + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + i + '</div>'),
-                        a('#contact_form')[0].reset())
-                    }
-                }),
-                !1
+                const name = a(this).find('input[name="name"]').val();
+                const lastname = a(this).find('input[name="lastname"]').val();
+                const subject = a(this).find('input[name="subject"]').val();
+                const message = a(this).find('textarea[name="message"]').val();
+                const body = `Hola soy ${name} ${lastname} me gustaría que contestes el sisguiente mensaje:\n\n ${message}`
+
+                window.open(`mailto:ovivas.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, "_system")
+                return false
             }
         })
     }),
